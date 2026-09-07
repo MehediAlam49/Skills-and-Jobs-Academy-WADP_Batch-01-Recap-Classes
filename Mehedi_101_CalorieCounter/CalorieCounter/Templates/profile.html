@@ -1,0 +1,11 @@
+{% extends 'master/base.html' %}
+
+
+{% block content %}
+<h1>Profile Info</h1>
+    <p>Name: {{request.user.user_info.name}}</p>
+    <p>BMR: {{request.user.user_info.bmr}} KcL</p>
+
+    <br><a href="{% url 'update_profile' %}">Update Profile</a>
+{% endblock content %}
+    

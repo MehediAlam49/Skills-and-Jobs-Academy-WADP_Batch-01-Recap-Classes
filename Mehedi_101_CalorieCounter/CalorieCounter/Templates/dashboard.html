@@ -1,0 +1,50 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+  <h1>Daily Consumed Calorie</h1>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card-header">Consumed Calories</div>
+      <div class="card-body">
+        <h5 class="card-title">{{ consumed_calores }}</h5>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-header">Requird Calorie</div>
+      <div class="card-body">
+        <h5 class="card-title">{{ required_calorie }}</h5>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-header">Less/More Calorie</div>
+      <div class="card-body">
+        <h5 class="card-title">{{ less_more }}</h5>
+      </div>
+    </div>
+  </div>
+  <p>Suggestion: {{ suggestion }}</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">SL</th>
+        <th scope="col">Item Name</th>
+        <th scope="col">Consumed Calories</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for data in today_consumed_data %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ data.item_name }}</td>
+          <td>{{ data.calorie }}</td>
+          <td>
+            <a class="btn btn-primary" href="{% url 'edit_calorie' data.id %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'delete_calorie' data.id %}">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
