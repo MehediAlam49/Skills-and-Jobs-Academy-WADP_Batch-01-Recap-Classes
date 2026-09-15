@@ -24,8 +24,8 @@ myEnv/
 # Django Core Files
 # ==============================
 *.log
-db.sqlite3
-db.sqlite3-journal
+#db.sqlite3
+#db.sqlite3-journal
 
 # ==============================
 # Static & Media Files
@@ -34,7 +34,7 @@ db.sqlite3-journal
 staticfiles/
 
 # User uploaded media (images, resumes, etc.)
-media/
+#media/
 
 # If you keep app-level static folders tracked, DO NOT ignore:
 # myapp/static/  <-- keep this
@@ -54,11 +54,7 @@ media/
 *.sublime-project
 *.sublime-workspace
 
-# ==============================
-# OS Files
-# ==============================
-.DS_Store
-Thumbs.db
+
 
 # ==============================
 # Testing / Coverage
@@ -67,12 +63,7 @@ Thumbs.db
 htmlcov/
 .pytest_cache/
 
-# ==============================
-# Package / Build
-# ==============================
-*.egg-info/
-dist/
-build/
+
 
 # ==============================
 # Large / Unnecessary Files
@@ -81,3 +72,5 @@ build/
 *.zip
 *.exe
 *.rar
+
+#checking
