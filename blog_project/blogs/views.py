@@ -5,6 +5,9 @@ from django.contrib import messages
 from .forms import RegistrationForm, UserChangeForm, BlogForm, LoginForm
 from .models import CustomUserModel, BlogModel
 
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+
 # Create your views here.
 def register_view(request):
     if request.method == 'POST':
@@ -34,6 +37,7 @@ def login_view(request):
             user = form_data.get_user()
             if user is not None:
                 login(request, user)
+                messages.success(request, 'You are Successfully Loged in.')
                 return redirect('home')  # Redirect to a success page.
             else:
                 messages.error(request, 'Invalid username or password.')
@@ -60,7 +64,6 @@ def logout_view(request):
 @login_required
 def UpdateProfile_view(request):
     user = request.user
-    password = user.password  # Store the current password
     if request.method == 'POST':
         form_data = UserChangeForm(request.POST, instance=user)
         if form_data.is_valid():
@@ -160,3 +163,24 @@ def blog_list_view(request):
         'blogs': blogs,
     }
     return render(request, 'blog_list.html', context)
+
+
+
+def change_password_view(request):
+    if request.method=='POST':
+        form_data=PasswordChangeForm(request.user, request.POST)
+        if form_data.is_valid():
+            user= form_data.save()
+            update_session_auth_hash(request, user) #Important!
+            messages.success(request, 'Your password was successfully updated')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Please correct the error below.')
+
+    form_data=PasswordChangeForm(request.user)
+    context={
+        'form_data':form_data,
+        'form_title': 'Change Password',
+        'form_submit_text': 'Change Password',
+    }
+    return render(request, 'master/base-form.html', context)

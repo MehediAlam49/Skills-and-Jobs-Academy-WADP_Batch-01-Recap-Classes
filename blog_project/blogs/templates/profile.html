@@ -16,6 +16,8 @@
           <p class="card-text"><strong>Status:</strong> {% if user.is_active %}Active{% else %}Inactive{% endif %}</p>
         </div>
         <a href="{% url 'update_profile' %}" class="btn btn-primary mb-2">Update Profile</a>
+        <a href="{% url 'change_password' %}" class="btn btn-success mb-2">Change Password</a>
+       
       </div>
     </div>
   </div>

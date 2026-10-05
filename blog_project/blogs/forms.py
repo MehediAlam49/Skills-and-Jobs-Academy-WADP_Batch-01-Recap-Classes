@@ -11,6 +11,7 @@ class LoginForm(AuthenticationForm):
     pass
 
 class UserChangeForm(UserChangeForm):
+    password=None
     class Meta:
         model = CustomUserModel
         fields = ('username', 'email', 'full_name', 'contact_number')

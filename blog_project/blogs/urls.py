@@ -15,4 +15,5 @@ urlpatterns = [
     path('blog-detail/<int:blog_id>/', views.blog_detail_view, name='blog_detail'),
     path('update-blog/<int:blog_id>/', views.blog_update_view, name='blog_update'),
     path('delete-blog/<int:blog_id>/', views.blog_delete_view, name='blog_delete'),
+    path('change-password', views.change_password_view, name='change_password'),
 ]
