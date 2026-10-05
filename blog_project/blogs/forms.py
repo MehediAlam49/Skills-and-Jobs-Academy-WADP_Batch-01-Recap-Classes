@@ -1,13 +1,16 @@
 from django import forms
 from .models import CustomUserModel, BlogModel
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 
-class CustomUserCreationForm(UserCreationForm):
+class RegistrationForm(UserCreationForm):
     class Meta:
         model = CustomUserModel
         fields = ('username', 'email', 'full_name', 'contact_number')
 
-class CustomUserChangeForm(UserChangeForm):
+class LoginForm(AuthenticationForm):
+    pass
+
+class UserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUserModel
         fields = ('username', 'email', 'full_name', 'contact_number')

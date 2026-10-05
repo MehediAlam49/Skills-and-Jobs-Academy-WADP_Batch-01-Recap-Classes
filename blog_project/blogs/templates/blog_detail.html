@@ -1,0 +1,14 @@
+{% extends 'master/base.html' %}
+
+
+{% block content %}
+    <h1>Blog details</h1>
+    <div class="card mb-4" style="max-width: 600px; margin: auto;">
+        <div class="card-body">
+            <h5 class="card-title">{{ blog.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">By {{ blog.author_name }} ({{ blog.author_email }})</h6>
+            <p class="card-text">{{ blog.description }}</p>
+            <p class="card-text"><small class="text-muted">Created at: {{ blog.created_at|date:"Y-m-d H:i" }}</small></p>
+        </div>
+{% endblock content %}
+    

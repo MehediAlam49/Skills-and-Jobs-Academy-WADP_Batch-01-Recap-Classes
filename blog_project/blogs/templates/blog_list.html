@@ -1,0 +1,39 @@
+{% extends 'master/base.html' %}
+
+
+{% block content %}
+    <h2 class="text-center">Blog List</h2>
+  <a href="{% url 'blog_create' %}" class="btn btn-success mb-3">Create Blog</a>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Email</th>
+      <th scope="col">Description</th>
+      <th scope="col">Created At</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    {% for blog in blogs %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ blog.title }}</td>
+      <td>{{ blog.author_name }}</td>
+      <td>{{ blog.author_email }}</td>
+      <td>{{ blog.description }}</td>
+      <td>{{ blog.created_at|date:"Y-m-d H:i" }}</td>
+        <td>
+            <a href="{% url 'blog_detail' blog.id %}" class="btn btn-primary btn-sm">View</a>
+            <a href="{% url 'blog_update' blog.id %}" class="btn btn-secondary btn-sm">Edit</a>
+            <a href="{% url 'blog_delete' blog.id %}" class="btn btn-danger btn-sm">Delete</a>
+    {% endfor %}
+        
+    
+  </tbody>
+</table>
+{% endblock content %}
+    
