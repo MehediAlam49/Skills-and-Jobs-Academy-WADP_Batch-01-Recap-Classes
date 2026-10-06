@@ -19,7 +19,7 @@ def register_view(request):
     else:
         form = RegistrationForm()
     context = {
-        'form': form,
+        'form_data': form,
         'form_title': 'Register',
         'form_submit_text': 'Register',
         'auth_switch_text': 'Already have an account? Login',
@@ -79,14 +79,14 @@ def add_book_view(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Book added successfully.')
-            return redirect('home')
+            return redirect('books')
         else:
             messages.error(request, 'Failed to add book. Please check the form for errors.')
     else:
         form = BookForm()
     
     context = {
-        'form': form,
+        'form_data': form,
         'form_title': 'Add Book',
         'form_submit_text': 'Add Book'
     }
@@ -100,14 +100,14 @@ def edit_book_view(request, book_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Book updated successfully.')
-            return redirect('home')
+            return redirect('books')
         else:
             messages.error(request, 'Failed to update book. Please check the form for errors.')
     else:
         form = BookForm(instance=book)
     
     context = {
-        'form': form,
+        'form_data': form,
         'form_title': 'Edit Book',
         'form_submit_text': 'Update Book'
     }
@@ -116,17 +116,10 @@ def edit_book_view(request, book_id):
 @login_required
 def delete_book_view(request, book_id):
     book = BookModel.objects.get(id=book_id)
-    if request.method == 'POST':
-        book.delete()
-        messages.success(request, 'Book deleted successfully.')
-        return redirect('home')
+    book.delete()
+    messages.success(request, 'Book deleted successfully.')
+    return redirect('books')
     
-    context = {
-        'book': book,
-        'form_title': 'Delete Book',
-        'form_submit_text': 'Confirm Delete'
-    }
-    return render(request, 'master/base-form.html', context)
 
 @login_required
 def book_detail_view(request, book_id):
@@ -134,4 +127,12 @@ def book_detail_view(request, book_id):
     context = {
         'book': book
     }
-    return render(request, 'book_detail.html', context)
+    return render(request, 'book_details.html', context)
+
+@login_required
+def book_list_view(request):
+    books = BookModel.objects.all()
+    context = {
+        'books': books
+    }
+    return render(request, 'books.html', context)
