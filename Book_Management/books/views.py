@@ -10,8 +10,7 @@ def register_view(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            form.save()
             messages.success(request, 'Registration successful.')
             return redirect('login')
         else:
@@ -22,7 +21,7 @@ def register_view(request):
         'form_data': form,
         'form_title': 'Register',
         'form_submit_text': 'Register',
-        'auth_switch_text': 'Already have an account? Login',
+        'auth_switch_text': 'Already have an account?',
         'auth_switch_link': 'login',
         'auth_switch_link_text': 'Login'
     }
@@ -48,7 +47,7 @@ def login_view(request):
         'form_data': form_data,
         'form_title': 'Login',
         'form_submit_text': 'Login',
-        'auth_switch_text': "Don't have an account? Register",
+        'auth_switch_text': "Don't have an account?",
         'auth_switch_link_text': 'Register',
         'auth_switch_link': 'register'
     }
